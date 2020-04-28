@@ -1,7 +1,11 @@
 import { Movie } from '../../../models/movie.model';
 import * as PlayListActions from './play-list.actions';
 
-const initialState = {
+export interface State {
+  movies: Movie[];
+}
+
+const initialState: State = {
   movies: [
     new Movie(1, 'Avangers', 'Action'),
     new Movie(2, 'Spiderman', 'Adventure'),
@@ -9,7 +13,9 @@ const initialState = {
   ]
 };
 
-export function playListReducer(state = initialState, action: PlayListActions.AddMovie) {
+export function playListReducer(
+  state: State = initialState,
+  action: PlayListActions.PlayListActions) {
   switch (action.type) {
     case PlayListActions.ADD_MOVIE:
       return {
