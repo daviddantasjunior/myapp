@@ -4,25 +4,30 @@ import { StoreModule, ActionReducer, MetaReducer, ActionReducerMap } from '@ngrx
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlayListModule } from './views/play-list/play-list.module';
+import { PlayListComponent } from './views/play-list/play-list.component';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import * as fromApp from './store/app.reducer';
 
+const reducers: ActionReducerMap<fromApp.AppState> = {
+  playList: fromApp.appReducer.playList
+};
+
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({ keys: ['playList'], rehydrate: true })(reducer);
+  console.log(reducer);
+  return localStorageSync({ keys: ['playList'], rehydrate: true, storage: localStorage })(reducer);
 }
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PlayListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PlayListModule,
-    StoreModule.forRoot(fromApp.appReducer, { metaReducers })
+    StoreModule.forRoot(reducers, { metaReducers })
   ],
   providers: [],
   bootstrap: [AppComponent]
