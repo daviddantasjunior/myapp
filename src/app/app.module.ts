@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { PlayListComponent } from './views/play-list/play-list.component';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import * as fromApp from './store/app.reducer';
+import { AuthComponent } from './views/auth/auth.component';
 
 const reducers: ActionReducerMap<fromApp.AppState> = {
-  playList: fromApp.appReducer.playList
+  playList: fromApp.appReducer.playList,
+  auth: fromApp.appReducer.auth
 };
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({ keys: ['playList'], rehydrate: true, storage: localStorage })(reducer);
+  return localStorageSync({ keys: ['playList', 'auth'], rehydrate: true, storage: localStorage })(reducer);
 }
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
@@ -21,7 +23,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 @NgModule({
   declarations: [
     AppComponent,
-    PlayListComponent
+    PlayListComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
