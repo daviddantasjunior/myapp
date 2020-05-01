@@ -6,7 +6,7 @@
         style="cursor: pointer;"
         *ngFor="let movie of (movies | async).movies; let i = index"
       >
-        {{ movie.name }} | {{ movie.hind }}
+        {{ movie.name }} | {{ movie.genreId }}
       </a>
     </ul>
   </div>

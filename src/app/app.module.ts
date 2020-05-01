@@ -13,7 +13,6 @@ const reducers: ActionReducerMap<fromApp.AppState> = {
 };
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  console.log(reducer);
   return localStorageSync({ keys: ['playList'], rehydrate: true, storage: localStorage })(reducer);
 }
 

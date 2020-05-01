@@ -7,9 +7,9 @@ export interface State {
 
 const initialState: State = {
   movies: [
-    new Movie(1, 'Avangers', 'Action'),
-    new Movie(2, 'Spiderman', 'Adventure'),
-    new Movie(3, 'IT', 'Horror')
+    new Movie('Avangers', 1, 1),
+    new Movie('Spiderman', 2, 2),
+    new Movie('IT', 3, 3)
   ]
 };
 
