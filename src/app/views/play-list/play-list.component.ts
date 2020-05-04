@@ -36,7 +36,9 @@ export class PlayListComponent implements OnInit {
   }
 
   async getUser() {
-    return await Promise.all([this.userService.table.where('name').equals('daviddantas').first]);
+    return await Promise.all([
+      this.userService.table.where('name').equals('daviddantas').first
+    ]);
   }
 
 

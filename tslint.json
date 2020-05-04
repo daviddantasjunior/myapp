@@ -92,7 +92,7 @@
     "restrict-plus-operands": true,
     "no-sparse-arrays": true,
     "no-conditional-assignment": true,
-    "no-unbound-method": true
+    "no-unbound-method": false
   },
   "rulesDirectory": [
     "codelyzer"

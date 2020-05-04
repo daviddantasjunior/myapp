@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+//import * as AuthActions from './store/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -6,11 +10,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
+  isLoginMode = true;
+  isLoading = false;
+  error: string = null;
 
-  constructor() { }
+  private closeSub: Subscription;
+
+  constructor(
+    //private authService: AuthService,
+    //private router: Router,
+    //private componentFactoryResolver: ComponentFactoryResolver,
+    private store: Store<fromApp.AppState>
+  ) { }
 
   ngOnInit(): void {
   }
+
+ /* ngOnDestroy(): {
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
+  }*/
 
 }
 /*

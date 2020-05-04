@@ -22,6 +22,11 @@ export class UserService {
     return await this.table.toArray();
   }
 
+  async getByEmail(email: string) {
+    let user = await this.table.where('email').equals(email).first()
+    return user;
+  }
+
   async add(data) {
     return await this.table.add(data);
   }
