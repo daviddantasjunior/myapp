@@ -24,7 +24,7 @@ export class UserService {
 
   async getByEmail(email: string) {
     let user = await this.table.where('email').equals(email).first()
-    return user;
+    return JSON.stringify(user);
   }
 
   async add(data) {

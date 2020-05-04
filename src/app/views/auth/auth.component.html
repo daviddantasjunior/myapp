@@ -1,17 +1,26 @@
 <div class="container">
-  <form >
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
     <img src="../../../assets/netflix-logo.svg">
     <div class="form-group">
-      <label for="inputEmail">Email</label>
-      <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="You email">
+      <label for="email">Email</label>
+      <input
+      type="email"
+      class="form-control"
+      id="email"
+      aria-describedby="emailHelp"
+      placeholder="You email"
+      ngModel
+      name="email"
+      required
+      email>
       <small id="emailHelp" class="form-text text-muted">We will never share your email with anyone.</small>
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
       <label for="inputName">Name</label>
       <input type="text" class="form-control" id="inputName" placeholder="You name">
-    </div>
+    </div>-->
     <br/>
-    <button type="submit" class="btn btn-danger">Log in</button>
+    <button type="submit" class="btn btn-danger" [disabled]="!authForm.valid">Log in</button>
     <br/>
     <a href="/play-list">Subscribe now</a>
   </form>

@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
 import * as fromApp from '../../store/app.reducer';
-//import * as AuthActions from './store/auth.actions';
+import * as AuthActions from './store/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -18,12 +22,32 @@ export class AuthComponent implements OnInit {
 
   constructor(
     //private authService: AuthService,
-    //private router: Router,
+    private router: Router,
     //private componentFactoryResolver: ComponentFactoryResolver,
+    private userService: UserService,
     private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit(): void {
+    this.userService.add(new User('daviddantas', 'david@uesb.edu.br', 'url', 1, 1));
+  }
+
+  async onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+    const email = form.value.email;
+
+    // TODO
+    /*this.store.dispatch(
+      new AuthActions.LoginStart({ email })
+    );*/
+
+
+    const auth = await this.userService.getByEmail(email);
+    if (auth) this.router.navigate(['/play-list']); else console.log('Not found');
+    console.log(auth);
+    form.reset();
   }
 
  /* ngOnDestroy(): {
