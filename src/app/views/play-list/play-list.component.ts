@@ -13,15 +13,20 @@ import { User } from 'src/app/models/user.model';
 })
 export class PlayListComponent implements OnInit {
   movies: Observable<{ movies: Movie[] }>;
-  //user: Observable<{ user: User }>;
+  auth: Observable<{ auth: User }>;
 
   constructor(
-    private store: Store<{ playList: { movies: Movie[] } }>,
+    private store: Store<{ 
+      playList: { movies: Movie[] },
+      auth: { auth: User }
+   }>,
     private userService: UserService
   ) { }
 
   ngOnInit(): void {
     this.movies = this.store.select('playList');
+    this.auth = this.store.select('auth');
+    console.log(this.auth);
     //this.clearDb();
     //this.saveInDb();
 //    this.userService.add(new User('daviddantas', 'david@uesb.edu.br', 'url', 1, 1));
