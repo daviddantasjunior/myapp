@@ -9,6 +9,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import * as fromApp from './store/app.reducer';
 import { AuthComponent } from './views/auth/auth.component';
 import { FormsModule } from '@angular/forms';
+import { SignupComponent } from './views/signup/signup.component';
 
 const reducers: ActionReducerMap<fromApp.AppState> = {
   playList: fromApp.appReducer.playList,
@@ -25,7 +26,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   declarations: [
     AppComponent,
     PlayListComponent,
-    AuthComponent
+    AuthComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

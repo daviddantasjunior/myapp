@@ -49,8 +49,9 @@ export class AuthComponent implements OnInit {
         });
       );*/
     }
-    else console.log('Not found');
-    console.log(auth);
+    else 
+      this.router.navigate(['/signup']);
+    
     form.reset();
   }
 
