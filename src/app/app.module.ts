@@ -10,6 +10,10 @@ import * as fromApp from './store/app.reducer';
 import { AuthComponent } from './views/auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './views/signup/signup.component';
+import { MovieSelectionComponent } from './views/movie-selection/movie-selection.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { MetricsComponent } from './views/metrics/metrics.component';
+import { ProfileComponent } from './views/profile/profile.component';
 
 const reducers: ActionReducerMap<fromApp.AppState> = {
   playList: fromApp.appReducer.playList,
@@ -27,7 +31,11 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AppComponent,
     PlayListComponent,
     AuthComponent,
-    SignupComponent
+    SignupComponent,
+    MovieSelectionComponent,
+    NavbarComponent,
+    MetricsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

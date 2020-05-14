@@ -1,24 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
-body {
+html, body {
   height: 100%;
-  background-image: url('./assets/image-back.jpg');
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  background-color: black;
+  color: whitesmoke;
 }
-
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 .container{
+  display: flex;
   width: 100%;
   min-width: 500px;
   text-align: center;
+  justify-content: center;
   padding-left: 30px;
 }
-
 form {
   display: flex;
   flex-direction: column;
   margin-top: 50px;
   padding: 40px;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgb(53, 54, 54, 0.35);
 }

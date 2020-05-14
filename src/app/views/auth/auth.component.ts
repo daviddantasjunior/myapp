@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UserService } from 'src/app/services/user.service';
@@ -12,7 +12,7 @@ import * as AuthActions from './store/auth.actions';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {  
+export class AuthComponent implements OnInit {
 
   constructor(
     private router: Router,
@@ -20,10 +20,11 @@ export class AuthComponent implements OnInit {
     private store: Store<fromApp.AppState>
   ) { }
 
+  private userAuthentication: boolean = false;
+  showMenuEmitter = new EventEmitter<boolean>();
+
   ngOnInit(): void {
-    const test = this.findUser('david@uesb.edu.br');
-    if (!test)
-      this.userService.add(new User('daviddantas', 'david@uesb.edu.br', 'url', 1, 1));
+
   }
 
   async onSubmit(form: NgForm) {
@@ -32,31 +33,13 @@ export class AuthComponent implements OnInit {
     }
     const email = form.value.email;
 
-    // TODO
+    // TODO IN SERVICE
     /*this.store.dispatch(
       new AuthActions.LoginStart({ email })
     );*/
 
+    await this.userService.login(email);
 
-    const auth = /*JSON.stringify(*/await this.userService.getByEmail(email)/*)*/;
-    if (auth) {
-      this.router.navigate(['/play-list']);
-      /*this.store.dispatch(
-        new AuthActions.LOGIN({
-          email: auth.email,
-          name: auth.name,
-          userId: auth.id 
-        });
-      );*/
-    }
-    else 
-      this.router.navigate(['/signup']);
-    
     form.reset();
   }
-
-  async findUser(email: string): Promise<string> {
-    return this.userService.getByEmail(email);
-  }
-
 }
