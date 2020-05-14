@@ -14,6 +14,7 @@ import { MovieSelectionComponent } from './views/movie-selection/movie-selection
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MetricsComponent } from './views/metrics/metrics.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { PlayMoviesComponent } from './views/play-movies/play-movies.component';
 
 const reducers: ActionReducerMap<fromApp.AppState> = {
   playList: fromApp.appReducer.playList,
@@ -35,7 +36,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     MovieSelectionComponent,
     NavbarComponent,
     MetricsComponent,
-    ProfileComponent
+    ProfileComponent,
+    PlayMoviesComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { SignupComponent } from './views/signup/signup.component';
 import { MovieSelectionComponent } from './views/movie-selection/movie-selection.component';
 import { MetricsComponent } from './views/metrics/metrics.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { PlayMoviesComponent } from './views/play-movies/play-movies.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'play-list', component: PlayListComponent },
   { path: 'movie-selection', component: MovieSelectionComponent },
+  { path: 'play-movies', component: PlayMoviesComponent },
   { path: 'metrics', component: MetricsComponent },
   { path: 'profile', component: ProfileComponent },
 ];
