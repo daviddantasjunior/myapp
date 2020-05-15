@@ -22,7 +22,7 @@
             type="text"
             id="username"
             placeholder="You name"
-            ngModel            
+            ngModel
             name="username"
             required
             username>
@@ -30,12 +30,12 @@
       <div class="form-group">
         <label for="country">Country</label>
         <select id="country" class="form-control" name="country" ngModel required country>
-            <option value="1">Brazil</option>
-            <option value="2">France</option>
+            <option *ngFor="let country of countries" value="{{ country.id }}">{{ country.name }}</option>
+           <!-- <option value="2">France</option>
             <option value="3">Germany</option>
             <option value="4">Italy</option>
             <option value="5">Spain</option>
-            <option value="6">United State</option>
+            <option value="6">United State</option>-->
         </select>
       </div>
       <br/>
@@ -44,4 +44,3 @@
       <a href="/">Log in</a>
     </form>
   </div>
-  

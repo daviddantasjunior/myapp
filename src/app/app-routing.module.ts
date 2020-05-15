@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'play-list', component: PlayListComponent },
   { path: 'movie-selection', component: MovieSelectionComponent },
-  { path: 'play-movies', component: PlayMoviesComponent },
+  { path: 'movie-selection/:id', component: PlayMoviesComponent },
   { path: 'metrics', component: MetricsComponent },
   { path: 'profile', component: ProfileComponent },
 ];

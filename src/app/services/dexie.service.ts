@@ -13,7 +13,7 @@ export class DexieService extends Dexie {
       user: '++id, name, email, photo, countryId',
       user_post: '++id, userId, postId',
       genre: '++id, name',
-      movie: '++id, name, image, video, genreId',
+      movie: '++id, name, description, image, video, genreId',
       user_movie: '++id, userId, movieId',
     });
   }

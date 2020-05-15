@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { Country } from 'src/app/models/country.model';
+import { CountryService } from 'src/app/services/country.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,12 +13,16 @@ import { User } from 'src/app/models/user.model';
 })
 export class SignupComponent implements OnInit {
 
+  countries: Country[];
+
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private countryService: CountryService
   ) { }
 
   ngOnInit(): void {
+    this.getAll();
   }
 
   async onSignup(form: NgForm) {
@@ -25,7 +31,11 @@ export class SignupComponent implements OnInit {
     }
     const { email, username, country } = form.value;
     await this.userService.add(new User(username, email, 'photo', country, null));
-    this.router.navigate(['/play-list']);
+    this.router.navigate(['/movie-selection']);
+  }
+
+  async getAll() {
+    this.countries = await this.countryService.getAll();
   }
 
 }

@@ -8,7 +8,7 @@ export class User {
   countryId: number;
   user_movies: UserMovie[];
 
-  constructor(name: string, email: string, photo: string, countryId: number, id?:number) {
+  constructor(name?: string, email?: string, photo?: string, countryId?: number, id?:number) {
     this.name = name;
     this.email = email;
     this.photo = photo;

@@ -46,6 +46,10 @@ export class UserService {
     return JSON.stringify(user);
   }
 
+  async getById(id: number): Promise<User> {
+    return await this.table.where('id').equals(id).first()
+  }
+
   async add(data) {
     return await this.table.add(data);
   }
