@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Movie } from 'src/app/models/movie.model';
 //import { db, Movie as Movies } from 'src/app/database/appdb';
 import { UserService } from 'src/app/services/user.service';
@@ -16,7 +16,7 @@ export class PlayListComponent implements OnInit {
   auth: Observable<{ auth: User }>;
 
   constructor(
-    private store: Store<{ 
+    private store: Store<{
       playList: { movies: Movie[] },
       auth: { auth: User }
    }>,

@@ -12,7 +12,9 @@ export class Login implements Action {
     public payload: {
       email: string;
       name: string;
+      photo: string;
       userId: number;
+      countryId: number;
     }
   ) {}
 }

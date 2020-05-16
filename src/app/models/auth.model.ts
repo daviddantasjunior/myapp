@@ -2,6 +2,8 @@ export class Auth {
   constructor(
     public email: string,
     public name: string,
-    public id: number
+    public photo: string,
+    public userId: number,
+    public countryId: number
   ) {}
 }

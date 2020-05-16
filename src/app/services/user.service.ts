@@ -6,6 +6,9 @@ import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { LocalUser } from '../shared/local_user';
 import { StorageService } from './storage.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from '../views/auth/store/auth.actions';
 
 export interface UserWithID extends User {
   id: number;
@@ -22,7 +25,8 @@ export class UserService {
   constructor(
     private router: Router,
     private dexieService: DexieService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private store: Store<fromApp.AppState>
   ) {
     this.table = this.dexieService.table('user');
   }
@@ -41,6 +45,13 @@ export class UserService {
         photo: user.photo,
         countryId: user.countryId
       }
+      this.store.dispatch(new AuthActions.Login({
+        email: user.email,
+        name: user.name,
+        photo: user.photo,
+        userId: user.id,
+        countryId: user.countryId
+      }));
       this.storageService.setLocalUser(local_user);
       this.userLogged = true;
       this.showMenuEmitter.emit(true);
@@ -54,6 +65,7 @@ export class UserService {
 
   logout() {
     this.storageService.setLocalUser(null);
+    this.store.dispatch(new AuthActions.Logout());
     this.router.navigate(['/']);
   }
 

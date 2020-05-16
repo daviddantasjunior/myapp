@@ -23,12 +23,14 @@ export function authReducer(
       const auth = new Auth(
         action.payload.email,
         action.payload.name,
-        action.payload.userId
+        action.payload.photo,
+        action.payload.userId,
+        action.payload.countryId
       );
       return {
         ...state,
+        auth,
         authError: null,
-        auth: auth,
         loading: false
       };
     case AuthActions.LOGOUT:
