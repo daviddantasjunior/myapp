@@ -23,10 +23,10 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    this.populeDB();
+    this.populateDB();
   }
 
-  async populeDB() {
+  async populateDB() {
     await this.dexieService.on('populate', () => {
       // Countries
       this.countryService.add(new Country('Brazil', null));
@@ -100,8 +100,8 @@ export class AppComponent {
       this.movieService.add(new Movie(
         'Mission: Impossible - Fallout',
         'When an IMF mission ends badly, the world is faced with dire consequences. As Ethan Hunt takes it upon himself to fulfill his original briefing, the CIA begin to question his loyalty and his motives. The IMF team find themselves in a race against time, hunted by assassins while trying to prevent a global catastrophe.',
-        'https://mini-netflix.s3-sa-east-1.amazonaws.com/images/mission-image2.jpg',
-        'https://mini-netflix.s3-sa-east-1.amazonaws.com/videos/mission.mp4',
+        'http://mini-netflix.s3-sa-east-1.amazonaws.com/images/mission-image2.jpg',
+        'http://mini-netflix.s3-sa-east-1.amazonaws.com/videos/mission.mp4',
         2,
         null
       ));

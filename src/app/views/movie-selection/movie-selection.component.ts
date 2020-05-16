@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MovieService } from 'src/app/services/movie.service';
+import { Movie } from 'src/app/models/movie.model';
 
 @Component({
   selector: 'app-movie-selection',
@@ -8,13 +10,18 @@ import { Router } from '@angular/router';
 })
 export class MovieSelectionComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  movies: Movie[];
+
+  constructor(
+    private movieService: MovieService
+  ) { }
 
   ngOnInit(): void {
+    this.getAllMovies();
   }
 
-  playMovie() {
-    this.router.navigate(['/play-movies']);
+  async getAllMovies() {
+    this.movies = await this.movieService.getAll();
   }
 
 }

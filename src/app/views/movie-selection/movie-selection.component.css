@@ -1,27 +1,22 @@
 html {
   scroll-behavior: smooth;
 }
-
 body {
   margin: 0;
   background-color: #000;
 }
-
 h1 {
   font-family: Arial;
   color: red;
   text-align: center;
 }
-
 h3 {
   font-family: Arial;
   color: white;
   text-align: center;
 }
-
 .wrapper {
   display: grid;
-  /*grid-template-columns: repeat(3, 100%);*/
   overflow: hidden;
   scroll-behavior: smooth;
 }
@@ -34,6 +29,7 @@ h3 {
 }
 .wrapper section .item {
   padding: 0 2px;
+  margin: 20px 0;
   transition: 250ms all;
 }
 .wrapper section .item:hover {
@@ -63,7 +59,6 @@ h3 {
   right: 0;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, black 100%);
 }
-
 @media only screen and (max-width: 600px) {
   a.arrow__btn {
     display: none;

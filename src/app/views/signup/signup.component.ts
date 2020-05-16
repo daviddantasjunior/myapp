@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAll();
+    this.getAllCountries();
   }
 
   async onSignup(form: NgForm) {
@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['/movie-selection']);
   }
 
-  async getAll() {
+  async getAllCountries() {
     this.countries = await this.countryService.getAll();
   }
 

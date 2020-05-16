@@ -22,6 +22,10 @@ export class MovieService {
     return this.table.toArray();
   }
 
+  async getById(id: number): Promise<Movie> {
+    return await this.table.where('id').equals(id).first()
+  }
+
   async add(data) {
     return await this.table.add(data);
   }

@@ -9,7 +9,7 @@ export class Movie {
   genreId: number;
   user_movies: UserMovie[];
 
-  constructor(name: string, description: string, image: string, video: string, genreId: number, id?:number) {
+  constructor(name?: string, description?: string, image?: string, video?: string, genreId?: number, id?:number) {
     this.name = name;
     this.description = description;
     this.image = image;
