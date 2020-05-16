@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import * as fromApp from '../../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-auth',
@@ -17,6 +18,7 @@ export class AuthComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
+    private storageService: StorageService,
     private store: Store<fromApp.AppState>
   ) { }
 
@@ -24,7 +26,8 @@ export class AuthComponent implements OnInit {
   showMenuEmitter = new EventEmitter<boolean>();
 
   ngOnInit(): void {
-
+    if (this.storageService.getLocalUser())
+      this.router.navigate(['/movie-selection']);
   }
 
   async onSubmit(form: NgForm) {

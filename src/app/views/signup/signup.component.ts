@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 import { Country } from 'src/app/models/country.model';
 import { CountryService } from 'src/app/services/country.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,20 +19,24 @@ export class SignupComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit(): void {
-    this.getAllCountries();
+    if (this.storageService.getLocalUser())
+      this.router.navigate(['/movie-selection']);
+    else
+      this.getAllCountries();
   }
 
-  async onSignup(form: NgForm) {
+  onSignup(form: NgForm) {
     if (!form.valid) {
       return;
     }
     const { email, username, country } = form.value;
-    await this.userService.add(new User(username, email, 'photo', country, null));
-    this.router.navigate(['/movie-selection']);
+    this.userService.add(new User(username, email, 'photo', country, null));
+    this.userService.login(email);
   }
 
   async getAllCountries() {

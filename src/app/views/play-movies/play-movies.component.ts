@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Movie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-play-movies',
@@ -16,11 +17,16 @@ export class PlayMoviesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private storageService: StorageService,
     private movieService: MovieService
   ) { }
 
   async ngOnInit() {
-    await this.loadVideo();
+    if (!this.storageService.getLocalUser())
+      this.router.navigate(['/']);
+    else
+      await this.loadVideo();
   }
 
   private loadVideo() {

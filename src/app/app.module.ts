@@ -44,6 +44,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     FormsModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers })
+    //StoreModule.forRoot(fromApp.appReducer)
   ],
   providers: [],
   bootstrap: [AppComponent]

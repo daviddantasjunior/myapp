@@ -4,6 +4,8 @@ import Dexie from 'dexie';
 import { DexieService } from './dexie.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
+import { LocalUser } from '../shared/local_user';
+import { StorageService } from './storage.service';
 
 export interface UserWithID extends User {
   id: number;
@@ -19,7 +21,8 @@ export class UserService {
 
   constructor(
     private router: Router,
-    private dexieService: DexieService
+    private dexieService: DexieService,
+    private storageService: StorageService
   ) {
     this.table = this.dexieService.table('user');
   }
@@ -31,6 +34,14 @@ export class UserService {
   async login(email: string) {
     let user = await this.table.where('email').equals(email).first();
     if (user) {
+      let local_user: LocalUser = {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        photo: user.photo,
+        countryId: user.countryId
+      }
+      this.storageService.setLocalUser(local_user);
       this.userLogged = true;
       this.showMenuEmitter.emit(true);
       this.router.navigate(['/movie-selection']);
@@ -39,6 +50,11 @@ export class UserService {
       this.showMenuEmitter.emit(false);
       this.router.navigate(['/signup']);
     }
+  }
+
+  logout() {
+    this.storageService.setLocalUser(null);
+    this.router.navigate(['/']);
   }
 
   async getByEmail(email: string) {
