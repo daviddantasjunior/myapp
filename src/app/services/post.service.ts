@@ -22,8 +22,8 @@ export class PostService {
     return this.table.toArray();
   }
 
-  add(data) {
-    return this.table.add(data);
+  async add(data) {
+    return await this.table.add(data);
   }
 
   update(id, data) {
@@ -35,6 +35,6 @@ export class PostService {
   }
 
   async getByMovie(id: number): Promise<Post[]> {
-    return await this.table.where('movieId').equals(id).toArray();
+    return (await this.table.where('movieId').equals(id).toArray()).reverse();
   }
 }

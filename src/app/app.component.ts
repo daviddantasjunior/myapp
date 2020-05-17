@@ -6,31 +6,28 @@ import { GenreService } from './services/genre.service';
 import { Genre } from './models/genre.model';
 import { MovieService } from './services/movie.service';
 import { Movie } from './models/movie.model';
-import { PostService } from './services/post.service';
-import { Post } from './models/post.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'myapp';
 
   constructor(
     private dexieService: DexieService,
     private countryService: CountryService,
     private genreService: GenreService,
-    private movieService: MovieService,
-    private postService: PostService
+    private movieService: MovieService
   ) { }
 
   ngOnInit() {
     this.populateDB();
   }
 
-  async populateDB() {
-    await this.dexieService.on('populate', () => {
+  populateDB() {
+    this.dexieService.on('populate', () => {
       // Countries
       this.countryService.add(new Country('Brazil', null));
       this.countryService.add(new Country('France', null));
@@ -165,11 +162,6 @@ export class AppComponent {
         3,
         null
       ));
-      // POSTS
-      this.postService.add(new Post(
-        'Júnior', 'Very Good', 1, null
-      ));
     });
-
   }
 }

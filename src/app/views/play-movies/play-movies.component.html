@@ -1,16 +1,7 @@
 <div class="showvideo">
 
   <h1>{{ movie.name }}</h1>
-  <tr *ngFor="let post of posts">
-    <td>{{ post.author }}</td>
-    <td>{{ post.text }}</td>
-  </tr>
 
-  <!--<video id="video" width="640" height="480" controls muted autoplay>
-    <source src="{{movie.video}}" type="video/mp4">
-
-      Your browser does not support the video tag.
-  </video>-->
  <video width="640" height="480" poster="../../../assets/play-movies.png" (canplay)="videoPlayer.play()"
         (loadedmetadata)="videoPlayer.muted = false"
         (click)="toggleVideo()"
@@ -18,7 +9,50 @@
     <source src="{{movie.video}}" type="video/mp4" />
     Browser not supported
   </video>
-  <br>
+
   <h3>{{ movie.description }}</h3>
+
+
+
+</div>
+
+<div class="table-posts">
+
+<h2>POSTS</h2>
+<div class="form-post">
+  <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)" class="form-inline">
+    <div class="form-group mb-2">
+      <label type="text" readonly>{{ userAuth.name }}</label>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <input
+        type="text"
+        class="form-control"
+        id="inputPost"
+        placeholder="Post"
+        maxlength="25"
+        ngModel
+        name="inputPost"
+        required
+        inputPost>
+    </div>
+    <button type="submit" [disabled]="!postForm.valid" class="btn btn-primary mb-2">Send</button>
+  </form>
+</div>
+
+  <table class="table table-bordered table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Author</th>
+        <th scope="col">Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <td>{{ post.author }}</td>
+        <td>{{ post.text }}</td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>
