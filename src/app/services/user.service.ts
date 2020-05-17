@@ -9,6 +9,8 @@ import { StorageService } from './storage.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from '../views/auth/store/auth.actions';
+import { CountryService } from './country.service';
+import { Country } from '../models/country.model';
 
 export interface UserWithID extends User {
   id: number;
@@ -21,10 +23,12 @@ export class UserService {
   private userLogged: boolean = false;
   table: Dexie.Table<UserWithID, number>;
   showMenuEmitter = new EventEmitter<boolean>();
+  countries: Country[];
 
   constructor(
     private router: Router,
     private dexieService: DexieService,
+    private countryService: CountryService,
     private storageService: StorageService,
     private store: Store<fromApp.AppState>
   ) {
@@ -38,19 +42,20 @@ export class UserService {
   async login(email: string) {
     let user = await this.table.where('email').equals(email).first();
     if (user) {
+      this.countries = await this.countryService.getAll();
       let local_user: LocalUser = {
         id: user.id,
         email: user.email,
         name: user.name,
         photo: user.photo,
-        countryId: user.countryId
+        country: this.countries[user.countryId - 1].name
       }
       this.store.dispatch(new AuthActions.Login({
         email: user.email,
         name: user.name,
         photo: user.photo,
         userId: user.id,
-        countryId: user.countryId
+        country: this.countries[user.countryId - 1].name
       }));
       this.storageService.setLocalUser(local_user);
       this.userLogged = true;

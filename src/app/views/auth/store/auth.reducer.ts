@@ -24,7 +24,7 @@ export function authReducer(
         action.payload.name,
         action.payload.photo,
         action.payload.userId,
-        action.payload.countryId
+        action.payload.country
       );
       return {
         ...state,

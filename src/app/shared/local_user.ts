@@ -3,5 +3,5 @@ export interface LocalUser {
   email: string;
   name: string;
   photo: string;
-  countryId: number;
+  country: string;
 }

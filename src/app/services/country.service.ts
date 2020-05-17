@@ -16,6 +16,7 @@ export class CountryService {
 
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('country');
+    this.table.mapToClass(Country);
   }
 
   async getById(id: number): Promise<Country> {

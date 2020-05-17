@@ -14,7 +14,7 @@ export class Login implements Action {
       name: string;
       photo: string;
       userId: number;
-      countryId: number;
+      country: string;
     }
   ) {}
 }

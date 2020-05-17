@@ -4,6 +4,6 @@ export class Auth {
     public name: string,
     public photo: string,
     public userId: number,
-    public countryId: number
+    public country: string
   ) {}
 }
