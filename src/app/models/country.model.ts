@@ -5,7 +5,7 @@ export class Country {
   name: string;
   users: User[];
 
-  constructor(name: string, id?:number) {
+  constructor(name?: string, id?:number) {
     this.name = name;
     if (id) this.id = id;
     Object.defineProperties(this, {

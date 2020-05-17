@@ -18,6 +18,10 @@ export class CountryService {
     this.table = this.dexieService.table('country');
   }
 
+  async getById(id: number): Promise<Country> {
+    return await this.table.where('id').equals(id).first();
+  }
+
   getAll() {
     return this.table.toArray();
   }

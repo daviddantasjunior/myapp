@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
       return;
     }
     const { email, username, country } = form.value;
-    this.userService.add(new User(username, email, 'photo', country, null));
+    this.userService.add(new User(username, email, '../../../assets/profile-netflix.png', country, null));
     this.userService.login(email);
   }
 
