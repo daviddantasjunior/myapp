@@ -6,6 +6,8 @@ import { GenreService } from './services/genre.service';
 import { Genre } from './models/genre.model';
 import { MovieService } from './services/movie.service';
 import { Movie } from './models/movie.model';
+import { PostService } from './services/post.service';
+import { Post } from './models/post.model';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,8 @@ export class AppComponent {
     private dexieService: DexieService,
     private countryService: CountryService,
     private genreService: GenreService,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private postService: PostService
   ) { }
 
   ngOnInit() {
@@ -161,6 +164,10 @@ export class AppComponent {
         'https://mini-netflix.s3-sa-east-1.amazonaws.com/videos/thecall.mp4',
         3,
         null
+      ));
+      // POSTS
+      this.postService.add(new Post(
+        'Júnior', 'Very Good', 1, null
       ));
     });
 

@@ -33,4 +33,8 @@ export class PostService {
   remove(id) {
     return this.table.delete(id);
   }
+
+  async getByMovie(id: number): Promise<Post[]> {
+    return await this.table.where('movieId').equals(id).toArray();
+  }
 }

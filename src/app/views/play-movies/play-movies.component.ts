@@ -4,6 +4,8 @@ import { switchMap } from "rxjs/operators";
 import { Movie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { PostService } from 'src/app/services/post.service';
+import { Post } from 'src/app/models/post.model';
 
 @Component({
   selector: 'app-play-movies',
@@ -14,19 +16,21 @@ export class PlayMoviesComponent implements OnInit {
 
   public movie: Movie = new Movie();
   @ViewChild('videoPlayer') videoplayer: ElementRef;
+  posts: Post[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private storageService: StorageService,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private postService: PostService
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     if (!this.storageService.getLocalUser())
       this.router.navigate(['/']);
     else
-      await this.loadVideo();
+      this.loadVideo();
   }
 
   private loadVideo() {
@@ -36,6 +40,8 @@ export class PlayMoviesComponent implements OnInit {
     .subscribe(
       (movie) => {
         this.movie = movie;
+        Promise.resolve(this.postService.getByMovie(this.movie.id))
+          .then(posts => this.posts = posts);
       },
       (error) => alert('An error has occurred.')
     )

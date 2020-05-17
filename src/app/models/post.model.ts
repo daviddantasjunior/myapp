@@ -1,15 +1,13 @@
-import { UserPost } from './user_post.model';
-
 export class Post {
   id?: number;
+  author: string;
   text: string;
-  user_posts: UserPost[];
+  movieId: number;
 
-  constructor(text: string, id?:number) {
+  constructor(author: string, text: string, movieId: number, id?:number) {
+    this.author = author;
     this.text = text;
+    this.movieId = movieId;
     if (id) this.id = id;
-    Object.defineProperties(this, {
-      user_posts: {value: [], enumerable: false, writable: true }
-    });
   }
 }

@@ -16,6 +16,7 @@ export class MovieService {
 
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('movie');
+    this.table.mapToClass(Movie);
   }
 
   getAll() {
