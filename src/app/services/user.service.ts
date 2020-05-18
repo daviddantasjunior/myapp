@@ -74,6 +74,10 @@ export class UserService {
     this.router.navigate(['/']);
   }
 
+  async getUsersByIds(id: number[]): Promise<User[]> {
+    return await this.table.where('id').anyOf(id).toArray();
+  }
+
   async getByEmail(email: string) {
     let user = await this.table.where('email').equals(email).first()
     return JSON.stringify(user);

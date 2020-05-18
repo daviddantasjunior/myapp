@@ -23,6 +23,10 @@ export class UserMovieService {
     return await this.table.where('userId').equals(id).distinct().reverse().toArray();
   }
 
+  async getLast3Users(id: number) {
+    return await this.table.where('movieId').equals(id).distinct().reverse().toArray();
+  }
+
   getAll() {
     return this.table.toArray();
   }

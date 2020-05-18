@@ -7,7 +7,14 @@ import { UserMovieService } from 'src/app/services/user_movie.service';
 import { LocalUser } from 'src/app/shared/local_user';
 import { UserMovie } from 'src/app/models/user_movie.model';
 import { MovieService } from 'src/app/services/movie.service';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
+export interface Watch {
+  image: string;
+  nameMovie: string;
+  users: Promise<User[]>
+}
 
 @Component({
   selector: 'app-metrics',
@@ -16,19 +23,24 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MetricsComponent implements OnInit {
 
-  public pieChartLabels = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4'];
-  public pieChartData = [120, 150, 180, 90];
+  public pieChartLabels = ['Action', 'Adventure', 'Drama'];
+  public pieChartData = [120, 150, 180];
   public pieChartType = 'pie';
 
   public localUser: LocalUser;
   public last5Movies: Movie[] = [];
+  public last3Users: User[] = [];
   public moviesIds: number[] = [];
+  public usersIds: number[] = [];
+  public userMoviesWatch: UserMovie[];
+  public watched: Watch[];
 
   constructor(
     private router: Router,
     private storageService: StorageService,
     private userMovieService: UserMovieService,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -36,43 +48,19 @@ export class MetricsComponent implements OnInit {
     if (!this.localUser)
       this.router.navigate(['/']);
     else {
-      /*var myChart = new Chart("myChart", {
-        type: 'bar',
-        data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
-              }
-            }]
-          }
-        }
-      });*/
       this.getLast5Movies();
+      /*Promise.resolve(this.movieService.getAll()
+        .then(movies => movies.forEach(movie => {
+          let watch: Watch;
+          watch = {
+            image: movie.image,
+            nameMovie: movie.name,
+            users: this.getLast3Users(movie.id)
+          }
+          this.watched.push(watch);
+        })));*/
+      //this.getLast3Users(movieId);
+      //this.getWatchedGenre();
     }
   }
 
@@ -98,6 +86,30 @@ export class MetricsComponent implements OnInit {
     );
 
     this.last5Movies = this.mapOrder(moviesAll, this.moviesIds, 'id');
+  }
+
+  async getLast3Users(movieId: number) {
+    let usersAll: User[];
+    Promise.resolve(await this.userMovieService.getLast3Users(movieId)
+      .then(
+        movies => {
+          this.userMoviesWatch = movies;
+          this.userMoviesWatch.forEach(value => {
+            if (this.usersIds.length < 3 && this.usersIds.indexOf(value.userId) < 0) {
+              this.usersIds.push(value.userId);
+            }
+          });
+        })
+    );
+
+    Promise.resolve(await this.userService.getUsersByIds(this.usersIds)
+      .then(users => {
+        usersAll = users;
+      })
+    );
+    this.userMoviesWatch = [];
+    this.usersIds = [];
+    this.last3Users = usersAll;
   }
 
   mapOrder(array: any, order: any, key: any) {

@@ -16,6 +16,7 @@ export class GenreService {
 
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('genre');
+    this.table.mapToClass(Genre);
   }
 
   getAll() {
