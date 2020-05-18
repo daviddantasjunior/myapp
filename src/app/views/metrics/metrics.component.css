@@ -1,0 +1,13 @@
+#divChart {
+  display: block;
+  height: 400px;
+  width: 400px;
+}
+
+.divLast5Movies {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  color: black;
+  margin-top: 50px;
+}

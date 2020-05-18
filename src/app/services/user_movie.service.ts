@@ -16,6 +16,11 @@ export class UserMovieService {
 
   constructor(private dexieService: DexieService) {
     this.table = this.dexieService.table('user_movie');
+    this.table.mapToClass(UserMovie);
+  }
+
+  async getLast5Movies(id: number) {
+    return await this.table.where('userId').equals(id).distinct().reverse().toArray();
   }
 
   getAll() {

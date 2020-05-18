@@ -4,11 +4,12 @@ import { StoreModule, ActionReducer, MetaReducer, ActionReducerMap } from '@ngrx
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlayListComponent } from './views/play-list/play-list.component';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import * as fromApp from './store/app.reducer';
-import { AuthComponent } from './views/auth/auth.component';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
+import { PlayListComponent } from './views/play-list/play-list.component';
+import { AuthComponent } from './views/auth/auth.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { MovieSelectionComponent } from './views/movie-selection/movie-selection.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -43,8 +44,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    ChartsModule,
     StoreModule.forRoot(reducers, { metaReducers })
-    //StoreModule.forRoot(fromApp.appReducer)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,8 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import { Auth } from 'src/app/models/auth.model';
 import { NgForm } from '@angular/forms';
+import { UserMovie } from 'src/app/models/user_movie.model';
+import { UserMovieService } from 'src/app/services/user_movie.service';
 
 @Component({
   selector: 'app-play-movies',
@@ -23,6 +25,7 @@ export class PlayMoviesComponent implements OnInit {
   posts: Post[];
   isAuthenticated = false;
   userAuth: Auth;
+  userMovie: UserMovie;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +33,8 @@ export class PlayMoviesComponent implements OnInit {
     private storageService: StorageService,
     private store: Store<fromApp.AppState>,
     private movieService: MovieService,
-    private postService: PostService
+    private postService: PostService,
+    private userMovieService: UserMovieService
   ) { }
 
   ngOnInit() {
@@ -54,6 +58,7 @@ export class PlayMoviesComponent implements OnInit {
       (movie) => {
         this.movie = movie;
         this.getAllPosts();
+        this.saveUserMovie(this.userAuth.userId, this.movie.id);
       },
       (error) => alert('An error has occurred.')
     )
@@ -83,5 +88,10 @@ export class PlayMoviesComponent implements OnInit {
   getAllPosts() {
     Promise.resolve(this.postService.getByMovie(this.movie.id))
           .then(posts => this.posts = posts);
+  }
+
+  saveUserMovie(userId: number, movieId: number) {
+    this.userMovie = { userId, movieId };
+    this.userMovieService.add(this.userMovie);
   }
 }
