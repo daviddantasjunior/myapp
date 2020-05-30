@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class DexieService extends Dexie {
   constructor() {
+    // Creating the database and its tables
     super('mini_netflix');
     this.version(1).stores({
       country: '++id, name',

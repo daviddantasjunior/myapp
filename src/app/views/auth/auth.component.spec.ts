@@ -8,12 +8,11 @@ import * as fromApp from '../../store/app.reducer';
 import { FormsModule } from '@angular/forms';
 
 const reducers: ActionReducerMap<fromApp.AppState> = {
-  playList: fromApp.appReducer.playList,
   auth: fromApp.appReducer.auth
 };
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({ keys: ['playList', 'auth'], rehydrate: true, storage: localStorage })(reducer);
+  return localStorageSync({ keys: ['auth'], rehydrate: true, storage: localStorage })(reducer);
 }
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];

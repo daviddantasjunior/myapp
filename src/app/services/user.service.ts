@@ -40,6 +40,10 @@ export class UserService {
   }
 
   async login(email: string) {
+    /*
+     * Log in to the application if the user is already registered,
+     * otherwise, go to the signup screen
+     */
     let user = await this.table.where('email').equals(email).first();
     if (user) {
       this.countries = await this.countryService.getAll();
@@ -69,6 +73,7 @@ export class UserService {
   }
 
   logout() {
+    // Delete the store and return to the login screen
     this.storageService.setLocalUser(null);
     this.store.dispatch(new AuthActions.Logout());
     this.router.navigate(['/']);

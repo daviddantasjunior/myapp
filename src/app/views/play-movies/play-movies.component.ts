@@ -41,6 +41,7 @@ export class PlayMoviesComponent implements OnInit {
     if (!this.storageService.getLocalUser())
       this.router.navigate(['/']);
     else
+      // Load the video and capture the credentials of the logged in user
       this.loadVideo();
       this.store
       .select('auth')
@@ -51,6 +52,7 @@ export class PlayMoviesComponent implements OnInit {
   }
 
   private loadVideo() {
+    // Load the video, all posts and save as watched video
     this.route.paramMap.pipe(
       switchMap(params => this.movieService.getById(+params.get('id')))
     )
@@ -65,11 +67,13 @@ export class PlayMoviesComponent implements OnInit {
   }
 
   toggleVideo() {
+    // Start the video
     this.videoplayer.nativeElement.load();
     this.videoplayer.nativeElement.controls = true;
   }
 
   onSubmit(form: NgForm) {
+    // Save and load posts
     if (!form.valid) {
       return;
     }

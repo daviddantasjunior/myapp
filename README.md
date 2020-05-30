@@ -29,3 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Technology
 
 * Ngrx/store
+
+## Running with docker and docker-compose
+
+Run `docker-compose up --build` to execute.

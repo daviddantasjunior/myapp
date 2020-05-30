@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
     if (!this.storageService.getLocalUser())
       this.router.navigate(['/']);
     else {
+      // Load the credentials of the logged in user
       this.store
       .select('auth')
       .pipe(map(authState => this.userAuth = authState.auth))

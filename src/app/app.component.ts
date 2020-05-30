@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Populates the database only when it is created
     this.populateDB();
   }
 

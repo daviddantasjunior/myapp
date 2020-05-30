@@ -6,12 +6,11 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import * as fromApp from './store/app.reducer';
 
 const reducers: ActionReducerMap<fromApp.AppState> = {
-  playList: fromApp.appReducer.playList,
   auth: fromApp.appReducer.auth
 };
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({ keys: ['playList', 'auth'], rehydrate: true, storage: localStorage })(reducer);
+  return localStorageSync({ keys: ['auth'], rehydrate: true, storage: localStorage })(reducer);
 }
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];

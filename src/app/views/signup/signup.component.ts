@@ -34,6 +34,7 @@ export class SignupComponent implements OnInit {
     if (!form.valid) {
       return;
     }
+    // Create new user and access the application
     const { email, username, country } = form.value;
     this.userService.add(new User(username, email, '../../../assets/profile-netflix.png', country, null));
     this.userService.login(email);

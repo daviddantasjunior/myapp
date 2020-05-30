@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Checks whether to display the navbar
     this.userService.showMenuEmitter.subscribe(
       show => this.showMenu = show
     );
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    // Delete the store and return to the login screen
     this.userService.logout();
     this.showMenu = false;
   }

@@ -10,19 +10,21 @@ export class StorageService {
   constructor() { }
 
   getLocalUser(): LocalUser {
+    // Gets the user to local storage
     let usr = localStorage.getItem(STORAGE_KEYS.localUser);
-    if(usr != null) {
-        return JSON.parse(usr);
+    if (usr != null) {
+      return JSON.parse(usr);
     } else {
-        return null;
+      return null;
     }
   }
 
-  setLocalUser(obj : LocalUser) {
-      if(obj != null) {
-          localStorage.setItem(STORAGE_KEYS.localUser, JSON.stringify(obj));
-      } else {
-          localStorage.removeItem(STORAGE_KEYS.localUser);
-      }
+  setLocalUser(obj: LocalUser) {
+    // Adds the user to the local storage
+    if (obj != null) {
+      localStorage.setItem(STORAGE_KEYS.localUser, JSON.stringify(obj));
+    } else {
+      localStorage.removeItem(STORAGE_KEYS.localUser);
+    }
   }
 }
